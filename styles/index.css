@@ -1,0 +1,41 @@
+body {
+  width: 80%;
+  margin: auto;
+}
+
+.servicios li img {
+  height: 100px;
+  width: 100px;
+}
+
+.servicios li span {
+  font-size: 16px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.servicios li {
+  /* lo siguiente evita que se mueva la pantalla
+  cuando se agrega un border */
+  box-sizing: border-box;
+  border: #f0f0f0 1px solid;
+
+  text-align: center;
+  margin: 20px;
+  width: 120px;
+  display: inline-block;
+}
+
+.servicios li:hover {
+  background-color: #f0f0f0;
+  border: goldenrod 1px solid;
+  cursor: pointer;
+}
+
+.servicios {
+  list-style: none;
+  padding-left: 0;
+}
