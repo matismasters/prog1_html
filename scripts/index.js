@@ -1,5 +1,8 @@
-// El siguiente codigo sirve para que el javascript se ejecute cuando cargue la pagina
-
+/* 
+  DOMContentLoaded es un evento que se dispara cuando el documento HTML ha sido 
+  completamente cargado y parseado, sin esperar hojas de estilo, imágenes y 
+  subtramas para finalizar la carga.
+*/
 document.addEventListener('DOMContentLoaded', function () {
   let botonAtencionCliente =
     document.getElementById('atencion-al-cliente');

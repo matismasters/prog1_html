@@ -1,4 +1,4 @@
-# Conceptos basicos del HTML y CSS
+# Conceptos basicos del HTML/CSS/JavaScript
 
 ## ¿Qué es HTML?
 
@@ -126,3 +126,311 @@ Para alinear elementos de forma vertical, se puede utilizar el siguiente código
 }
 ```
 Para más información sobre Flexbox, se puede consultar la [documentación oficial de CSS](https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Conceptos_Basicos_de_Flexbox) o [Como funciona flexbox por Victor Roble](https://victorroblesweb.es/2022/09/27/como-funciona-flexbox-en-css/).
+
+## JavaScript en el navegador
+
+Hasta ahora hemos aprendido a escribir código JavaScript y ejecutarlo principalmente en nuestra consola de `Node.js`. 
+
+En la consola de `Node.js` utilizamos `console.log` para imprimir mensajes, `prompt-sync` para pedirle al usuario que ingrese datos, y el código se ejecutaba de forma secuencial, desde la primer línea hasta la última y luego terminaba el programa.
+
+```javascript
+// Comienza el programa
+const prompt = require('prompt-sync')();
+
+let nombre = prompt('Ingrese su nombre: ');
+console.log(`Hola, ${nombre}!`);
+// Termina el programa
+```
+
+### El navegador es un entorno de desarrollo diferente:
+
+#### Consola del navegador
+
+Tiene su propia consola, que se puede abrir con `F12` o `Ctrl+Shift+I`, o `click derecho > Inspect`. Sin embargo, no se cuenta con que el usuario interactúe con la consola en ningún momento, por lo que si bien podemos imprimir mensajes con `console.log`, no podemos pedirle al usuario que ingrese datos.
+
+1. Abre la consola del navegador utilizando alguno de los métodos mencionados.
+2. Escribe el siguiente código en la consola y presiona Enter.
+
+```javascript
+
+let nombre = prompt('Ingrese su nombre: ');
+let estaSeguro = confirm(`Estás seguro de que tu nombre es ${nombre}?`);
+console.log(`Hola, ${nombre}!`);
+```
+
+3. Observa que el código se detiene en la línea 2, y no se ejecuta la línea 3 hasta que el usuario ingresa un nombre y presiona Enter.
+4. Observa que el código se detiene en la línea 3, y no se ejecuta la línea 4 hasta que el usuario presiona "Aceptar" o "Cancelar" en la ventana emergente.
+5. Escribe en la consola lo siguiente:
+
+```javascript
+
+alert(estaSeguro);
+```
+
+Como ves, la variable y su valor quedaron guardados y estarán disponibles hasta que recargues la página.
+Cualquier cambio que hagas en la consola, se mantendrá hasta que recargues la página.
+
+#### Objetos globales
+
+Tenemos acceso a objetos como `document`, `window`, `navigator`, `location`, `history`, `localStorage`, `sessionStorage`, entre otros, que nos permiten interactuar con las interfaces programáticas (API) del navegador. 
+
+1. Abre la consola del navegador utilizando alguno de los métodos mencionados.
+2. Escribe el siguiente código en la consola y presiona Enter.
+
+```javascript
+
+console.log(document);
+```
+3. Observa que se imprime un objeto con información sobre el documento HTML actual. Este objeto nos permite acceder a los elementos de la página, modificar su contenido, estilos, eventos, etc. Le llamamos el DOM (Document Object Model).
+
+4. Escribe en la consola lo siguiente:
+
+```javascript
+
+console.log(window);
+console.log(window.height);
+console.log(window.width)
+
+```
+
+5. Observa que se imprime un objeto con información sobre la ventana del navegador. Este objeto nos permite acceder a las propiedades y métodos del navegador, como el tamaño de la ventana, la URL actual, etc.
+6. Escribe en la consola lo siguiente:
+
+```javascript
+
+console.log(navigator);
+```
+
+7. Observa que se imprime un objeto con información sobre el navegador. Este objeto nos permite acceder a las propiedades y métodos del navegador, como el nombre del navegador, la versión, etc.
+8. Escribe en la consola lo siguiente
+
+```javascript
+
+console.log(location);
+```
+
+9. Observa que se imprime un objeto con información sobre la URL actual. Este objeto nos permite acceder a las propiedades y métodos de la URL, como el protocolo, el host, el pathname, etc.
+10. Escribe en la consola lo siguiente:
+
+```javascript
+
+console.log(localStorage);
+```
+
+11. Observa que se imprime un objeto con información sobre el almacenamiento local. Este objeto nos permite almacenar datos en el navegador de forma persistente, es decir, que los datos se mantienen incluso después de cerrar la ventana del navegador.
+
+#### Eventos
+
+El objetivo del navegador es interpretar código HTML y mostrarselo al usuario, por lo que el código JavaScript se ejecuta una vez mientras el navegador va cargando todos los recursos de la página(scripts, imágenes, estilos, etc). Una vez que el navegador termina de cargar la página, el código JavaScript se detiene y no se ejecuta más.
+
+Históricamente, HTML y el protocolo HTTP fueron diseñados para ser estáticos, es decir, que no cambian una vez que se cargan en el navegador. 
+
+```
++------------+           +--------------+          +-------------+
+|            |   HTTP    |              |  HTTP    |             |
+|  Cliente   |  ------>  |  Servidor    |  ----->  |  Servidor   |
+| (Navegador)|  <------  |  Web (Nginx, |  <-----  | de Archivos |
+|            |   HTML,   |  Apache)     |  HTML,   | (HTML, CSS, |
+|            |  CSS, JS  |              |  CSS, JS |  JS, etc)   |
++------------+           +--------------+          +-------------+
+```
+
+---
+
+**Ejercicio:**
+- Crea los siguientes 3 archivos HTML dentro de la misma carpeta:
+  - `index.html`
+  - `pagina1.html`
+  - `pagina2.html`
+
+Escribe este código HTML en el archivo `index.html`:
+```html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Index</title>
+</head>
+<body>
+  <h1>Index</h1>
+  <a href="pagina1.html">Página 1</a>
+  <a href="pagina2.html">Página 2</a>
+</body>
+</html>
+
+```
+
+Escribe este código HTML en el archivo `pagina1.html`, y para la página 2, escribe algo similar pero con el título `Página 2` y un enlace para volver al `Index`:
+
+```html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Página 1</title>
+</head>
+<body>
+  <h1>Página 1</h1>
+  <a href="index.html">Volver al Index</a>
+</body>
+</html>
+
+```
+
+**Ejercicio 2:**
+- Crea los siguientes archivos html dentro de la misma carpeta:
+  - `index.html`
+  - `respuestaForm.html`
+
+Escribe este código HTML en el archivo `index.html`:
+
+```html 
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Formulario</title>
+</head>
+<body>
+  <h1>Formulario</h1>
+  <form action="respuestaForm.html" method="GET">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre">
+    <input type="submit" value="Enviar">
+  </form>
+</body>
+</html>
+
+```
+
+Escribe este código HTML en el archivo `respuestaForm.html`:
+
+```html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Respuesta</title>
+</head>
+<body>
+  <h1>Respuesta</h1>
+  <p>Gracias por enviar el formulario</p>
+  <p>Mira la URL para ver los datos que enviaste</p>
+</body>
+</html>
+
+```
+
+---
+
+## ¿Qué es un evento?
+
+Un evento es una acción que ocurre en el navegador, como hacer clic en un botón, mover el mouse sobre un elemento, presionar una tecla, etc. Los eventos son generados por el usuario o por el navegador, y pueden ser capturados y manejados por el código JavaScript.
+
+### Disparar eventos
+
+Utilizaremos el término `disparar`, equivalente en inglés a `trigger`, para referirnos a la acción de generar un evento en el navegador. Los eventos pueden ser disparados tanto por acciones del usuario, como hacer clic en un botón o presionar una tecla, como por el navegador, en situaciones como la carga de una página o el cambio de tamaño de una ventana. Estos eventos son capturados y manejados por nuestro código JavaScript para realizar diversas funciones.
+
+### Escuchar eventos
+
+Utilizaremos el término `escuchar` para referirnos a la acción de capturar un evento. Por ejemplo, cuando el usuario hace clic en un botón, el código JavaScript puede escuchar el evento de clic y ejecutar una función. Cuando el usuario presiona una tecla, el código JavaScript puede escuchar el evento de tecla presionada y ejecutar una función. Cuando el navegador termina de cargar la página, el código JavaScript puede escuchar el evento de carga y ejecutar una función.
+
+### Eventos que nadie escucha
+
+El navegador `dispara` todos los eventos, todo el tiempo, pero si no hay código JavaScript que `escuche` esos eventos, no pasa nada. Por ejemplo, si el usuario hace clic en un título `h1`, pero no hay código JavaScript que escuche el evento de clic, no pasa nada. Si el usuario presiona una tecla, pero no hay código JavaScript que escuche el evento de tecla presionada, no pasa nada. Si el navegador termina de cargar la página, pero no hay código JavaScript que escuche el evento de carga, no pasa nada.
+
+Bueno, en realidad, si pasa algo. El navegador tiene acciones por default para algunos de los eventos, como agregar una letra a una caja de texto cuando el usuario presiona una tecla, o un click en un botón `<button></button>` que esté dentro de un formulario `<form></form>` enviará los datos de los campos del formulario a la otra página, como lo vimos en el ejercicio del formulario anterior.
+
+## ¿Qué es un evento?
+
+Un evento es una acción que ocurre dentro del navegador, provocada por el usuario —como hacer clic en un botón o presionar una tecla— o por procesos automáticos del navegador, como la carga de una página o cambios en el tamaño de una ventana. Estos eventos pueden ser capturados y gestionados por el código JavaScript.
+
+### Disparar eventos
+
+El término `disparar` (en inglés, `trigger`) se refiere a la iniciación de un evento en el navegador. Los eventos pueden ser disparados por interacciones del usuario o automáticamente por el navegador. Una vez disparados, estos eventos pueden ser manejados por nuestro código JavaScript para ejecutar diversas funciones.
+
+### Escuchar eventos
+
+Para `escuchar` eventos, utilizaremos el término `capturar`. Esto implica mantenerse a la espera de un evento disparado para ejecutar una función específica. Por ejemplo, nuestro código JavaScript puede estar programado para capturar y responder a eventos como clics de ratón, pulsaciones de teclas o la carga completa de una página.
+
+### Eventos que nadie escucha
+
+Aunque el navegador dispara eventos constantemente, si no existe código JavaScript configurado para capturar estos eventos, no tendrán un efecto observable. Sin embargo, algunos eventos sí tienen acciones predeterminadas en el navegador, como la inserción de texto en un campo o el envío de un formulario al hacer clic en un botón dentro de este. Si bien estos eventos se procesan automáticamente, nuestro código puede personalizar o anular estas acciones predeterminadas.
+
+## ¿Qué es un evento?
+
+Un evento es una acción que ocurre dentro del navegador, provocada por el usuario —como hacer clic en un botón o presionar una tecla— o por procesos automáticos del navegador, como la carga de una página o cambios en el tamaño de una ventana. Estos eventos pueden ser capturados y gestionados por el código JavaScript.
+
+## Trabajar con eventos
+
+Cuando un evento se `dispara`, el navegador envía una señal a JavaScript con información sobre el evento. Mediante el uso de `listeners` o `escuchadores`, podemos `reaccionar` a estos eventos y ejecutar funciones específicas.
+
+## Listeners o Escuchadores
+
+Los `listeners` o `escuchadores` son funciones que se encargan de `escuchar` los eventos que ocurren en el navegador. Estos `escuchadores` se encargan de `reaccionar` a los eventos y `ejecutar` una función específica en respuesta a ellos.
+
+Para definir un `escuchador`, utilizamos el método `addEventListener` sobre un elemento del DOM. Este método recibe dos argumentos: el nombre del evento que queremos escuchar y la función que se ejecutará cuando el evento ocurra.
+
+```javascript
+
+function elementoOnClick(evento) {
+  console.log(`Se hizo clic en el elemento ${evento.target.innerText}`);
+}
+
+elemento.addEventListener('click', elementoOnClick);
+```
+
+Si queremos `reaccionar` a eventos de cualquier elemento del DOM, podemos utilizar el objeto `document` para `escuchar` los eventos. Por ejemplo, si queremos `reaccionar` a un clic en cualquier parte de la página, podemos hacer lo siguiente:
+
+```javascript
+
+function documentoOnClick(evento) {
+  console.log(`Se hizo clic en el documento`);
+}
+
+document.addEventListener('click', documentoOnClick);
+```
+
+## Eventos que nadie escucha
+
+Aunque el navegador dispara eventos constantemente, si no existe código JavaScript configurado para capturar estos eventos, no tendrán un efecto observable. Sin embargo, algunos eventos sí tienen acciones predeterminadas en el navegador, como la inserción de texto en un campo o el envío de un formulario al hacer clic en un botón dentro de este. Si bien estos eventos se procesan automáticamente, nuestro código puede personalizar o anular estas acciones predeterminadas.
+
+## Eventos del mouse ratón
+
+Algunos de los eventos del mouse más comunes son:
+
+- `click`: Se dispara cuando el usuario hace clic en un elemento.
+- `dblclick`: Se dispara cuando el usuario hace doble clic en un elemento.
+- `mouseover`: Se dispara cuando el usuario mueve el mouse sobre un elemento.
+- `mouseout`: Se dispara cuando el usuario mueve el mouse fuera de un elemento.
+- `mousedown`: Se dispara cuando el usuario presiona un botón del mouse.
+- `mouseup`: Se dispara cuando el usuario suelta un botón del mouse.
+
+## Eventos de teclado
+
+Algunos de los eventos de teclado más comunes son:
+
+- `keydown`: Se dispara cuando el usuario presiona una tecla.
+- `keypress`: Se dispara cuando el usuario presiona una tecla que produce un carácter.
+- `keyup`: Se dispara cuando el usuario suelta una tecla.
+
+## Eventos de formulario
+
+Algunos de los eventos de formulario más comunes son:
+
+- `submit`: Se dispara cuando el usuario envía un formulario.
+- `change`: Se dispara cuando el valor de un elemento cambia.
+- `focus`: Se dispara cuando un elemento recibe el foco.
+- `blur`: Se dispara cuando un elemento pierde el foco.
+
+## Eventos de ventana
+
+Algunos de los eventos de ventana más comunes son:
+
+- `load`: Se dispara cuando la página ha terminado de cargar.
+- `resize`: Se dispara cuando la ventana cambia de tamaño.
+- `scroll`: Se dispara cuando el usuario desplaza la página.
+
+
+
+
