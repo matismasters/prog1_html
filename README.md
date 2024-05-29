@@ -361,7 +361,7 @@ document.addEventListener('click', documentoOnClick);
 
 Aunque el navegador dispara eventos constantemente, si no existe código JavaScript configurado para capturar estos eventos, no tendrán un efecto observable. Sin embargo, algunos eventos sí tienen acciones predeterminadas en el navegador, como la inserción de texto en un campo o el envío de un formulario al hacer clic en un botón dentro de este. Si bien estos eventos se procesan automáticamente, nuestro código puede personalizar o anular estas acciones predeterminadas.
 
-### Eventos del mouse ratón
+### Eventos del mouse
 
 Algunos de los eventos del mouse más comunes son:
 
