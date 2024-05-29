@@ -219,7 +219,7 @@ console.log(localStorage);
 
 11. Observa que se imprime un objeto con información sobre el almacenamiento local. Este objeto nos permite almacenar datos en el navegador de forma persistente, es decir, que los datos se mantienen incluso después de cerrar la ventana del navegador.
 
-#### Eventos
+## Eventos
 
 El objetivo del navegador es interpretar código HTML y mostrarselo al usuario, por lo que el código JavaScript se ejecuta una vez mientras el navegador va cargando todos los recursos de la página(scripts, imágenes, estilos, etc). Una vez que el navegador termina de cargar la página, el código JavaScript se detiene y no se ejecuta más.
 
@@ -321,51 +321,15 @@ Escribe este código HTML en el archivo `respuestaForm.html`:
 
 ```
 
----
-
-## ¿Qué es un evento?
-
-Un evento es una acción que ocurre en el navegador, como hacer clic en un botón, mover el mouse sobre un elemento, presionar una tecla, etc. Los eventos son generados por el usuario o por el navegador, y pueden ser capturados y manejados por el código JavaScript.
-
-### Disparar eventos
-
-Utilizaremos el término `disparar`, equivalente en inglés a `trigger`, para referirnos a la acción de generar un evento en el navegador. Los eventos pueden ser disparados tanto por acciones del usuario, como hacer clic en un botón o presionar una tecla, como por el navegador, en situaciones como la carga de una página o el cambio de tamaño de una ventana. Estos eventos son capturados y manejados por nuestro código JavaScript para realizar diversas funciones.
-
-### Escuchar eventos
-
-Utilizaremos el término `escuchar` para referirnos a la acción de capturar un evento. Por ejemplo, cuando el usuario hace clic en un botón, el código JavaScript puede escuchar el evento de clic y ejecutar una función. Cuando el usuario presiona una tecla, el código JavaScript puede escuchar el evento de tecla presionada y ejecutar una función. Cuando el navegador termina de cargar la página, el código JavaScript puede escuchar el evento de carga y ejecutar una función.
-
-### Eventos que nadie escucha
-
-El navegador `dispara` todos los eventos, todo el tiempo, pero si no hay código JavaScript que `escuche` esos eventos, no pasa nada. Por ejemplo, si el usuario hace clic en un título `h1`, pero no hay código JavaScript que escuche el evento de clic, no pasa nada. Si el usuario presiona una tecla, pero no hay código JavaScript que escuche el evento de tecla presionada, no pasa nada. Si el navegador termina de cargar la página, pero no hay código JavaScript que escuche el evento de carga, no pasa nada.
-
-Bueno, en realidad, si pasa algo. El navegador tiene acciones por default para algunos de los eventos, como agregar una letra a una caja de texto cuando el usuario presiona una tecla, o un click en un botón `<button></button>` que esté dentro de un formulario `<form></form>` enviará los datos de los campos del formulario a la otra página, como lo vimos en el ejercicio del formulario anterior.
-
-## ¿Qué es un evento?
+### ¿Qué es un evento?
 
 Un evento es una acción que ocurre dentro del navegador, provocada por el usuario —como hacer clic en un botón o presionar una tecla— o por procesos automáticos del navegador, como la carga de una página o cambios en el tamaño de una ventana. Estos eventos pueden ser capturados y gestionados por el código JavaScript.
 
-### Disparar eventos
-
-El término `disparar` (en inglés, `trigger`) se refiere a la iniciación de un evento en el navegador. Los eventos pueden ser disparados por interacciones del usuario o automáticamente por el navegador. Una vez disparados, estos eventos pueden ser manejados por nuestro código JavaScript para ejecutar diversas funciones.
-
-### Escuchar eventos
-
-Para `escuchar` eventos, utilizaremos el término `capturar`. Esto implica mantenerse a la espera de un evento disparado para ejecutar una función específica. Por ejemplo, nuestro código JavaScript puede estar programado para capturar y responder a eventos como clics de ratón, pulsaciones de teclas o la carga completa de una página.
-
-### Eventos que nadie escucha
-
-Aunque el navegador dispara eventos constantemente, si no existe código JavaScript configurado para capturar estos eventos, no tendrán un efecto observable. Sin embargo, algunos eventos sí tienen acciones predeterminadas en el navegador, como la inserción de texto en un campo o el envío de un formulario al hacer clic en un botón dentro de este. Si bien estos eventos se procesan automáticamente, nuestro código puede personalizar o anular estas acciones predeterminadas.
-
-## ¿Qué es un evento?
-
-Un evento es una acción que ocurre dentro del navegador, provocada por el usuario —como hacer clic en un botón o presionar una tecla— o por procesos automáticos del navegador, como la carga de una página o cambios en el tamaño de una ventana. Estos eventos pueden ser capturados y gestionados por el código JavaScript.
-
-## Trabajar con eventos
+### Trabajar con eventos
 
 Cuando un evento se `dispara`, el navegador envía una señal a JavaScript con información sobre el evento. Mediante el uso de `listeners` o `escuchadores`, podemos `reaccionar` a estos eventos y ejecutar funciones específicas.
 
-## Listeners o Escuchadores
+### Listeners o Escuchadores
 
 Los `listeners` o `escuchadores` son funciones que se encargan de `escuchar` los eventos que ocurren en el navegador. Estos `escuchadores` se encargan de `reaccionar` a los eventos y `ejecutar` una función específica en respuesta a ellos.
 
@@ -376,6 +340,8 @@ Para definir un `escuchador`, utilizamos el método `addEventListener` sobre un 
 function elementoOnClick(evento) {
   console.log(`Se hizo clic en el elemento ${evento.target.innerText}`);
 }
+
+let elemento = document.getElementById('elemento');
 
 elemento.addEventListener('click', elementoOnClick);
 ```
@@ -391,11 +357,11 @@ function documentoOnClick(evento) {
 document.addEventListener('click', documentoOnClick);
 ```
 
-## Eventos que nadie escucha
+### Eventos que nadie escucha
 
 Aunque el navegador dispara eventos constantemente, si no existe código JavaScript configurado para capturar estos eventos, no tendrán un efecto observable. Sin embargo, algunos eventos sí tienen acciones predeterminadas en el navegador, como la inserción de texto en un campo o el envío de un formulario al hacer clic en un botón dentro de este. Si bien estos eventos se procesan automáticamente, nuestro código puede personalizar o anular estas acciones predeterminadas.
 
-## Eventos del mouse ratón
+### Eventos del mouse ratón
 
 Algunos de los eventos del mouse más comunes son:
 
@@ -406,7 +372,7 @@ Algunos de los eventos del mouse más comunes son:
 - `mousedown`: Se dispara cuando el usuario presiona un botón del mouse.
 - `mouseup`: Se dispara cuando el usuario suelta un botón del mouse.
 
-## Eventos de teclado
+### Eventos de teclado
 
 Algunos de los eventos de teclado más comunes son:
 
@@ -414,7 +380,7 @@ Algunos de los eventos de teclado más comunes son:
 - `keypress`: Se dispara cuando el usuario presiona una tecla que produce un carácter.
 - `keyup`: Se dispara cuando el usuario suelta una tecla.
 
-## Eventos de formulario
+### Eventos de formulario
 
 Algunos de los eventos de formulario más comunes son:
 
@@ -423,7 +389,7 @@ Algunos de los eventos de formulario más comunes son:
 - `focus`: Se dispara cuando un elemento recibe el foco.
 - `blur`: Se dispara cuando un elemento pierde el foco.
 
-## Eventos de ventana
+### Eventos de ventana
 
 Algunos de los eventos de ventana más comunes son:
 

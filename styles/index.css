@@ -39,3 +39,8 @@ body {
   list-style: none;
   padding-left: 0;
 }
+
+.carrito li img {
+  width: 50px;
+  height: 50px;
+}

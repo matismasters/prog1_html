@@ -3,31 +3,92 @@
   completamente cargado y parseado, sin esperar hojas de estilo, imágenes y 
   subtramas para finalizar la carga.
 */
-document.addEventListener('DOMContentLoaded', function () {
-  let botonAtencionCliente =
-    document.getElementById('atencion-al-cliente');
 
-  botonAtencionCliente.addEventListener('click', atencionCliente);
+const SERVICIOS = [
+  { id: 25, nombre: "Chivito", precio: 350, img: "images/chivito.webp" },
+  { id: 26, nombre: "Hamburguesa", precio: 250, img: "images/hamburguesa.avif" },
+  { id: 27, nombre: "Pizza", precio: 150, img: "images/pizza.avif" },
+  { id: 28, nombre: "Empanadas", precio: 65, img: "images/empanadas.avif" }
+]
 
-  let botonesComprar = document.querySelectorAll('.servicios li button');
+function documentOnLoad() {
 
-  for (let boton of botonesComprar) {
-    boton.addEventListener('click', comprar);
+  let ul = document.getElementById("lista-servicios");
+  ul.innerHTML = "";
+
+  for (let i = 0; i < SERVICIOS.length; i++) {
+    let li = crearLiServicio(SERVICIOS[i]);
+    ul.appendChild(li);
   }
+}
 
-  let buscador = document.getElementById('buscador');
-  buscador.value;
-});
+document.addEventListener('DOMContentLoaded', documentOnLoad);
 
-function atencionCliente(evento) {
-  alert("Estamos trabajando en ello");
-  evento.target.innerHTML = "No moleste";
+function crearLiServicio(servicio) {
+  let li = document.createElement("li");
+  li.dataset.idservicio = servicio.id;
+  let span = document.createElement("span");
+  span.innerHTML = servicio.nombre;
+  let img = document.createElement("img");
+  img.src = servicio.img;
+  img.alt = servicio.nombre;
+  let span2 = document.createElement("span");
+  span2.innerHTML = `$${servicio.precio}`;
+  let button = document.createElement("button");
+  button.innerHTML = "Comprar";
 
-  let tituloPrincipal = document.getElementById('titulo-principal');
+  button.addEventListener("click", comprar);
 
-  tituloPrincipal.innerHTML = "Gracias por su paciencia";
+  li.appendChild(span);
+  li.appendChild(img);
+  li.appendChild(span2);
+  li.appendChild(button);
+
+  return li;
+}
+
+function crearLiCarrito(servicio) {
+  let li = document.createElement("li");
+  let img = document.createElement("img");
+  img.src = servicio.img;
+  img.alt = servicio.nombre;
+  li.appendChild(img);
+
+  let span = document.createElement("span");
+  span.innerHTML = `${servicio.nombre} - $${servicio.precio}`;
+
+  li.appendChild(span);
+  return li;
 }
 
 function comprar(evento) {
-  alert("Gracias por su compra");
+  idServicio = evento.target.parentElement.dataset.idservicio;
+
+  let servicio = buscarServicio(idServicio);
+
+  let carritoTotalUnidades = document.getElementById("carritoTotalUnidades");
+
+  let totalActualDeUnidades = parseInt(carritoTotalUnidades.innerHTML)
+
+  carritoTotalUnidades.innerHTML = totalActualDeUnidades + 1;
+
+  let carritoTotalPrecio = document.getElementById("carritoTotalPrecio");
+
+  let totalActualDePrecio = parseInt(carritoTotalPrecio.innerHTML);
+
+  carritoTotalPrecio.innerHTML = totalActualDePrecio + servicio.precio;
+
+  let ul = document.getElementById("carritoLista");
+
+  let li = crearLiCarrito(servicio);
+  ul.appendChild(li);
+}
+
+function buscarServicio(idServicio) {
+  for (let i = 0; i < SERVICIOS.length; i++) {
+    if (SERVICIOS[i].id == idServicio) {
+      return SERVICIOS[i];
+    }
+  }
+  return null;
 }
