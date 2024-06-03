@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+  <link rel="stylesheet" href="../styles/todas_las_paginas.css">
+  <link rel="stylesheet" href="../styles/admin.css">
+  <title>Chivitosya - Admin</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li class="align-left">
+          <a href="index.html">Chivitosya - Admin</a>
+        </li>
+        <li class="align-right">
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li>Admin</li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <div class="pure-form">
+        <fieldset>
+          <legend>Agregar producto</legend>
+          <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" />
+          </div>
+          <div>
+            <label for="precio">Precio</label>
+            <input type="number" id="precio" name="precio" />
+          </div>
+          <div>
+            <label for="imagen">Imagen</label>
+            <input type="file" id="imagen" name="imagen" />
+          </div>
+         <button>Agregar</button>
+        </fieldset>
+      </div>
+    </section>
+
+    <section>
+      <h2>Lista de productos</h2>
+      <table class="pure-table-striped">
+        <thead>
+          <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img src="../images/chivito.webp" alt="Chivito" /></td>
+            <td>Chivitos</td>
+            <td>$350</td>
+            <td>
+              <button>Editar</button>
+              <button>Eliminar</button>
+            </td>
+          </tr>
+          <tr>
+            <td><img src="../images/hamburguesa.avif" alt="Hamburguesa" /></td>
+            <td>Hamburguesas</td>
+            <td>$400</td>
+            <td>
+              <button>Editar</button>
+              <button>Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>Chivitosya - 2021</p>
+  </footer>
+</body>
+</html>

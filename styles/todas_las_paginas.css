@@ -1,0 +1,55 @@
+body {
+  width: 80%;
+  margin: auto;
+}
+
+nav {
+  width: 100%;
+  background-color: #f0f0f0;
+}
+
+nav ul {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+}
+
+nav > ul > li {
+  margin: 10px;
+}
+
+nav > ul > li > a {
+  text-decoration: none;
+  color: black;
+  font-size: large;
+  font-weight: bold;
+}
+
+nav > ul > li > ul > li {
+  margin: 0 10px;
+}
+
+/*
+
+Given the following html structure
+      <ul>
+        <li class="align-left">
+          <a href="index.html">Chivitosya - Admin</a>
+        </li>
+        <li class="align-right">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+        </li>
+      </ul>
+We use flexbox to align the first li to the left and the second li to the right
+*/
+
+.align-left {
+  margin-right: auto;
+}
+
+.align-right {
+  margin-left: auto;
+}
