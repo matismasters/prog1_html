@@ -12,9 +12,9 @@ const SERVICIOS = [
   { id: 29, nombre: "Faina", precio: 200, img: "images/faina.jpg" }
 ]
 
-function buscarServicio(idServicio) {
+function buscarProducto(idProducto) {
   for (let i = 0; i < SERVICIOS.length; i++) {
-    if (SERVICIOS[i].id == idServicio) {
+    if (SERVICIOS[i].id == idProducto) {
       return SERVICIOS[i];
     }
   }
@@ -23,12 +23,12 @@ function buscarServicio(idServicio) {
 
 let CARRITO = [];
 
-function agregarServicioAlCarrito(servicio) {
-  let indice = buscarEnCarrito(servicio);
+function agregarProductoAlCarrito(producto) {
+  let indice = buscarEnCarrito(producto);
   console.log(indice);
   if (indice === -1) {
     CARRITO.push({
-      servicio: servicio,
+      producto: producto,
       cantidad: 1
     });
   } else {
@@ -36,8 +36,8 @@ function agregarServicioAlCarrito(servicio) {
   }
 }
 
-function eliminarServicioDelCarrito(servicio) {
-  let indice = buscarEnCarrito(servicio);
+function eliminarProductoDelCarrito(producto) {
+  let indice = buscarEnCarrito(producto);
   if (indice !== -1) {
     let nuevoCarrito = [];
     for (let i = 0; i < CARRITO.length; i++) {
@@ -49,10 +49,10 @@ function eliminarServicioDelCarrito(servicio) {
   }
 }
 
-function buscarEnCarrito(servicio) {
-  console.log(servicio);
+function buscarEnCarrito(producto) {
+  console.log(producto);
   for (let i = 0; i < CARRITO.length; i++) {
-    if (CARRITO[i].servicio.id == servicio.id) {
+    if (CARRITO[i].producto.id == producto.id) {
       return i;
     }
   }
@@ -61,27 +61,27 @@ function buscarEnCarrito(servicio) {
 
 function documentOnLoad() {
 
-  let ul = document.getElementById("lista-servicios");
+  let ul = document.getElementById("lista-productos");
   ul.innerHTML = "";
 
   for (let i = 0; i < SERVICIOS.length; i++) {
-    let li = crearLiServicio(SERVICIOS[i]);
+    let li = crearLiProducto(SERVICIOS[i]);
     ul.appendChild(li);
   }
 }
 
 document.addEventListener('DOMContentLoaded', documentOnLoad);
 
-function crearLiServicio(servicio) {
+function crearLiProducto(producto) {
   let li = document.createElement("li");
-  li.dataset.idservicio = servicio.id;
+  li.dataset.idproducto = producto.id;
   let span = document.createElement("span");
-  span.innerHTML = servicio.nombre;
+  span.innerHTML = producto.nombre;
   let img = document.createElement("img");
-  img.src = servicio.img;
-  img.alt = servicio.nombre;
+  img.src = producto.img;
+  img.alt = producto.nombre;
   let span2 = document.createElement("span");
-  span2.innerHTML = `$${servicio.precio}`;
+  span2.innerHTML = `$${producto.precio}`;
   let button = document.createElement("button");
   button.innerHTML = "Comprar";
 
@@ -109,7 +109,7 @@ function cambiarTotalPrecioCarrito() {
   let carritoTotalPrecio = document.getElementById("carritoTotalPrecio");
   let totalActualDePrecio = 0;
   for (let lineaCarrito of CARRITO) {
-    totalActualDePrecio += lineaCarrito.cantidad * lineaCarrito.servicio.precio;
+    totalActualDePrecio += lineaCarrito.cantidad * lineaCarrito.producto.precio;
   }
   carritoTotalPrecio.innerHTML = totalActualDePrecio;
 }
@@ -128,16 +128,16 @@ function generarCarrito() {
 }
 
 function crearLiCarrito(lineaCarrito) {
-  let servicio = lineaCarrito.servicio;
+  let producto = lineaCarrito.producto;
   let cantidad = lineaCarrito.cantidad;
-  let precioTotal = cantidad * servicio.precio;
+  let precioTotal = cantidad * producto.precio;
 
   let li = document.createElement("li");
-  li.dataset.idservicio = servicio.id;
+  li.dataset.idproducto = producto.id;
 
   let img = document.createElement("img");
-  img.src = servicio.img;
-  img.alt = servicio.nombre;
+  img.src = producto.img;
+  img.alt = producto.nombre;
 
   let botonEliminar = document.createElement("button");
   botonEliminar.innerHTML = "X";
@@ -146,7 +146,7 @@ function crearLiCarrito(lineaCarrito) {
   li.appendChild(img);
 
   let span = document.createElement("span");
-  span.innerHTML = `${cantidad}x ${servicio.nombre} - $${servicio.precio} ($${precioTotal})`;
+  span.innerHTML = `${cantidad}x ${producto.nombre} - $${producto.precio} ($${precioTotal})`;
 
   li.appendChild(span);
   li.appendChild(botonEliminar);
@@ -156,20 +156,20 @@ function crearLiCarrito(lineaCarrito) {
 function onClickBotonEliminar(evento) {
   let li = evento.target.parentElement;
   let ul = li.parentElement;
-  let idServicio = li.dataset.idservicio;
-  let servicio = buscarServicio(idServicio);
+  let idProducto = li.dataset.idproducto;
+  let producto = buscarProducto(idProducto);
 
-  eliminarServicioDelCarrito(servicio);
+  eliminarProductoDelCarrito(producto);
   console.log(CARRITO);
 
   generarCarrito();
 }
 
 function onClickBotonComprar(evento) {
-  idServicio = evento.target.parentElement.dataset.idservicio;
-  let servicio = buscarServicio(idServicio);
+  idProducto = evento.target.parentElement.dataset.idproducto;
+  let producto = buscarProducto(idProducto);
 
-  agregarServicioAlCarrito(servicio);
+  agregarProductoAlCarrito(producto);
   console.log(CARRITO);
 
   generarCarrito();
