@@ -1,14 +1,9 @@
-body {
-  width: 80%;
-  margin: auto;
-}
-
-.servicios li img {
+.productos li img {
   height: 100px;
   width: 100px;
 }
 
-.servicios li span {
+.productos li span {
   font-size: 16px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   display: block;
@@ -17,7 +12,7 @@ body {
   margin-top: 10px;
 }
 
-.servicios li {
+.productos li {
   /* lo siguiente evita que se mueva la pantalla
   cuando se agrega un border */
   box-sizing: border-box;
@@ -30,13 +25,13 @@ body {
   padding: 0px 5px 10px 5px;
 }
 
-.servicios li:hover {
+.productos li:hover {
   background-color: lightgoldenrodyellow;
   border: goldenrod 1px solid;
   cursor: pointer;
 }
 
-.servicios {
+.productos {
   list-style: none;
   padding-left: 0;
 }

@@ -5,52 +5,32 @@
 */
 
 const SERVICIOS = [
-  { id: 25, nombre: "Chivito", precio: 350, img: "images/chivito.webp" },
-  { id: 26, nombre: "Hamburguesa", precio: 250, img: "images/hamburguesa.avif" },
-  { id: 27, nombre: "Pizza", precio: 150, img: "images/pizza.avif" },
-  { id: 28, nombre: "Empanadas", precio: 65, img: "images/empanadas.avif" },
-  { id: 29, nombre: "Faina", precio: 200, img: "images/faina.jpg" }
+  { id: 25, nombre: "Chivito", precio: 350, urlImagen: "images/chivito.webp" },
+  { id: 26, nombre: "Hamburguesa", precio: 250, urlImagen: "images/hamburguesa.avif" },
+  { id: 27, nombre: "Pizza", precio: 150, urlImagen: "images/pizza.avif" },
+  { id: 28, nombre: "Empanadas", precio: 65, urlImagen: "images/empanadas.avif" },
+  { id: 29, nombre: "Faina", precio: 200, urlImagen: "images/faina.jpg" }
 ]
 
 let CARRITO = [];
 
-function buscarServicio(idServicio) {
+function buscarProducto(idProducto) {
   for (let i = 0; i < SERVICIOS.length; i++) {
-    if (SERVICIOS[i].id == idServicio) {
+    if (SERVICIOS[i].id == idProducto) {
       return SERVICIOS[i];
     }
   }
   return null;
 }
 
-function agregarServicio(propiedadesDelServicio) {
-  // { id: 21, nombre: "Chivito", precio: 350, img: "images/chivito.webp", categoria: "Comida Casera" }
+let CARRITO = [];
 
-  let nuevoServicio = propiedadesDelServicio;
-
-  let valido = true;
-
-  if (nuevoServicio.nombre === "") {
-    valido = false;
-    alert("El nombre no puede estar vacío");
-  }
-
-  if (nuevoServicio.precio === "" || isNaN(nuevoServicio.precio)) {
-    valido = false;
-    alert("El precio no puede estar vacío");
-  }
-
-  if (valido) {
-    SERVICIOS.push(nuevoServicio);
-  }
-}
-
-function agregarServicioAlCarrito(servicio) {
-  let indice = buscarEnCarrito(servicio);
+function agregarProductoAlCarrito(producto) {
+  let indice = buscarEnCarrito(producto);
   console.log(indice);
   if (indice === -1) {
     CARRITO.push({
-      servicio: servicio,
+      producto: producto,
       cantidad: 1
     });
   } else {
@@ -58,8 +38,8 @@ function agregarServicioAlCarrito(servicio) {
   }
 }
 
-function eliminarServicioDelCarrito(servicio) {
-  let indice = buscarEnCarrito(servicio);
+function eliminarProductoDelCarrito(producto) {
+  let indice = buscarEnCarrito(producto);
   if (indice !== -1) {
     let nuevoCarrito = [];
     for (let i = 0; i < CARRITO.length; i++) {
@@ -71,10 +51,10 @@ function eliminarServicioDelCarrito(servicio) {
   }
 }
 
-function buscarEnCarrito(servicio) {
-  console.log(servicio);
+function buscarEnCarrito(producto) {
+  console.log(producto);
   for (let i = 0; i < CARRITO.length; i++) {
-    if (CARRITO[i].servicio.id == servicio.id) {
+    if (CARRITO[i].producto.id == producto.id) {
       return i;
     }
   }
@@ -83,11 +63,11 @@ function buscarEnCarrito(servicio) {
 
 function documentOnLoad() {
 
-  let ul = document.getElementById("lista-servicios");
+  let ul = document.getElementById("lista-productos");
   ul.innerHTML = "";
 
   for (let i = 0; i < SERVICIOS.length; i++) {
-    let li = crearLiServicio(SERVICIOS[i]);
+    let li = crearLiProducto(SERVICIOS[i]);
     ul.appendChild(li);
   }
 
@@ -96,23 +76,23 @@ function documentOnLoad() {
 
 document.addEventListener('DOMContentLoaded', documentOnLoad);
 
-function crearLiServicio(servicio) {
+function crearLiProducto(producto) {
   let li = document.createElement("li");
-  li.dataset.idservicio = servicio.id;
+  li.dataset.idproducto = producto.id;
   let span = document.createElement("span");
-  span.innerHTML = servicio.nombre;
-  let img = document.createElement("img");
-  img.src = servicio.img;
-  img.alt = servicio.nombre;
+  span.innerHTML = producto.nombre;
+  let urlImagen = document.createElement("urlImagen");
+  urlImagen.src = producto.urlImagen;
+  urlImagen.alt = producto.nombre;
   let span2 = document.createElement("span");
-  span2.innerHTML = `$${servicio.precio}`;
+  span2.innerHTML = `$${producto.precio}`;
   let button = document.createElement("button");
   button.innerHTML = "Comprar";
 
   button.addEventListener("click", onClickBotonComprar);
 
   li.appendChild(span);
-  li.appendChild(img);
+  li.appendChild(urlImagen);
   li.appendChild(span2);
   li.appendChild(button);
 
@@ -133,7 +113,7 @@ function cambiarTotalPrecioCarrito() {
   let carritoTotalPrecio = document.getElementById("carritoTotalPrecio");
   let totalActualDePrecio = 0;
   for (let lineaCarrito of CARRITO) {
-    totalActualDePrecio += lineaCarrito.cantidad * lineaCarrito.servicio.precio;
+    totalActualDePrecio += lineaCarrito.cantidad * lineaCarrito.producto.precio;
   }
   carritoTotalPrecio.innerHTML = totalActualDePrecio;
 }
@@ -152,25 +132,25 @@ function generarCarrito() {
 }
 
 function crearLiCarrito(lineaCarrito) {
-  let servicio = lineaCarrito.servicio;
+  let producto = lineaCarrito.producto;
   let cantidad = lineaCarrito.cantidad;
-  let precioTotal = cantidad * servicio.precio;
+  let precioTotal = cantidad * producto.precio;
 
   let li = document.createElement("li");
-  li.dataset.idservicio = servicio.id;
+  li.dataset.idproducto = producto.id;
 
-  let img = document.createElement("img");
-  img.src = servicio.img;
-  img.alt = servicio.nombre;
+  let urlImagen = document.createElement("urlImagen");
+  urlImagen.src = producto.urlImagen;
+  urlImagen.alt = producto.nombre;
 
   let botonEliminar = document.createElement("button");
   botonEliminar.innerHTML = "X";
   botonEliminar.addEventListener("click", onClickBotonEliminar);
 
-  li.appendChild(img);
+  li.appendChild(urlImagen);
 
   let span = document.createElement("span");
-  span.innerHTML = `${cantidad}x ${servicio.nombre} - $${servicio.precio} ($${precioTotal})`;
+  span.innerHTML = `${cantidad}x ${producto.nombre} - $${producto.precio} ($${precioTotal})`;
 
   li.appendChild(span);
   li.appendChild(botonEliminar);
@@ -180,20 +160,20 @@ function crearLiCarrito(lineaCarrito) {
 function onClickBotonEliminar(evento) {
   let li = evento.target.parentElement;
   let ul = li.parentElement;
-  let idServicio = li.dataset.idservicio;
-  let servicio = buscarServicio(idServicio);
+  let idProducto = li.dataset.idproducto;
+  let producto = buscarProducto(idProducto);
 
-  eliminarServicioDelCarrito(servicio);
+  eliminarProductoDelCarrito(producto);
   console.log(CARRITO);
 
   generarCarrito();
 }
 
 function onClickBotonComprar(evento) {
-  idServicio = evento.target.parentElement.dataset.idservicio;
-  let servicio = buscarServicio(idServicio);
+  idProducto = evento.target.parentElement.dataset.idproducto;
+  let producto = buscarProducto(idProducto);
 
-  agregarServicioAlCarrito(servicio);
+  agregarProductoAlCarrito(producto);
   console.log(CARRITO);
 
   generarCarrito();
