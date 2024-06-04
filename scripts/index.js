@@ -5,11 +5,11 @@
 */
 
 const SERVICIOS = [
-  { id: 25, nombre: "Chivito", precio: 350, img: "images/chivito.webp" },
-  { id: 26, nombre: "Hamburguesa", precio: 250, img: "images/hamburguesa.avif" },
-  { id: 27, nombre: "Pizza", precio: 150, img: "images/pizza.avif" },
-  { id: 28, nombre: "Empanadas", precio: 65, img: "images/empanadas.avif" },
-  { id: 29, nombre: "Faina", precio: 200, img: "images/faina.jpg" }
+  { id: 25, nombre: "Chivito", precio: 350, urlImagen: "images/chivito.webp" },
+  { id: 26, nombre: "Hamburguesa", precio: 250, urlImagen: "images/hamburguesa.avif" },
+  { id: 27, nombre: "Pizza", precio: 150, urlImagen: "images/pizza.avif" },
+  { id: 28, nombre: "Empanadas", precio: 65, urlImagen: "images/empanadas.avif" },
+  { id: 29, nombre: "Faina", precio: 200, urlImagen: "images/faina.jpg" }
 ]
 
 function buscarProducto(idProducto) {
@@ -77,9 +77,9 @@ function crearLiProducto(producto) {
   li.dataset.idproducto = producto.id;
   let span = document.createElement("span");
   span.innerHTML = producto.nombre;
-  let img = document.createElement("img");
-  img.src = producto.img;
-  img.alt = producto.nombre;
+  let urlImagen = document.createElement("urlImagen");
+  urlImagen.src = producto.urlImagen;
+  urlImagen.alt = producto.nombre;
   let span2 = document.createElement("span");
   span2.innerHTML = `$${producto.precio}`;
   let button = document.createElement("button");
@@ -88,7 +88,7 @@ function crearLiProducto(producto) {
   button.addEventListener("click", onClickBotonComprar);
 
   li.appendChild(span);
-  li.appendChild(img);
+  li.appendChild(urlImagen);
   li.appendChild(span2);
   li.appendChild(button);
 
@@ -135,15 +135,15 @@ function crearLiCarrito(lineaCarrito) {
   let li = document.createElement("li");
   li.dataset.idproducto = producto.id;
 
-  let img = document.createElement("img");
-  img.src = producto.img;
-  img.alt = producto.nombre;
+  let urlImagen = document.createElement("urlImagen");
+  urlImagen.src = producto.urlImagen;
+  urlImagen.alt = producto.nombre;
 
   let botonEliminar = document.createElement("button");
   botonEliminar.innerHTML = "X";
   botonEliminar.addEventListener("click", onClickBotonEliminar);
 
-  li.appendChild(img);
+  li.appendChild(urlImagen);
 
   let span = document.createElement("span");
   span.innerHTML = `${cantidad}x ${producto.nombre} - $${producto.precio} ($${precioTotal})`;

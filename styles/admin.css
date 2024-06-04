@@ -5,20 +5,30 @@ section table tr td img {
 }
 
 section fieldset > div {
-  margin: 10px;
   display: block;
+  width: 100%;
 }
 
 section fieldset label {
   width: 200px;
-  display: inline-block;
+  display: block;
+}
+
+section fieldset input,
+section fieldset select {
+  width: 100%;
+}
+
+section fieldset .actions {
+  display: flex;
+  justify-content: space-between;
 }
 
 section fieldset button {
   display: block;
-  width: 100%;
   padding: 5px;
-  margin-top: 10px;
+  margin: 10px 0;
+  flex-grow: 1;
 }
 
 section table {
@@ -30,7 +40,7 @@ section table td:last-child {
 }
 
 section table td:last-child button {
-  margin: 0 5px;
+  margin: 5px;
 }
 
 section table td:first-child {

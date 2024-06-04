@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
   <link rel="stylesheet" href="../styles/todas_las_paginas.css">
   <link rel="stylesheet" href="../styles/admin.css">
+  <script src="../scripts/admin.js"></script>
   <title>Chivitosya - Admin</title>
 </head>
 <body>
@@ -28,8 +29,10 @@
   <main>
     <section>
       <div class="pure-form">
-        <fieldset>
-          <legend>Agregar producto</legend>
+        <button id="mostrarOcultarFormulario" class="pure-button pure-button-primary">Agregar producto</button>
+        <fieldset class="oculto">
+          <legend id="leyendaFormulario">Agregar producto</legend>
+          <input type="hidden" id="idProductoParaEditar" name="idProducto" value="0" />
           <div>
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre" />
@@ -39,11 +42,26 @@
             <input type="number" id="precio" name="precio" />
           </div>
           <div>
-            <label for="imagen">URL Imagen</label>
-            <input type="text" id="imagen" name="imagen" />
+            <label for="urlImagen">URL Imagen</label>
+            <input type="text" id="urlImagen" name="urlImagen" />
           </div>
-         <button>Agregar</button>
-        </fieldset>
+          <div>
+            <label for="tipo">Tipo de comida</label>
+            <select id="tipo" name="tipo">
+              <option value="Casera">Casera</option>
+              <option value="Vegetariana">Vegetariana</option>
+              <option value="Pizzería">Pizzería</option>
+            </select>
+          </div>
+          <div class="actions">
+            <button id="botonCancelar" class="pure-button pure-button-secondary">
+              Cancelar
+            </button>
+            <button id="botonAgregar" class="pure-button pure-button-primary">
+              Agregar
+            </button>
+          </div>
+       </fieldset>
       </div>
     </section>
 
@@ -55,26 +73,19 @@
             <th>Imagen</th>
             <th>Nombre</th>
             <th>Precio</th>
+            <th>Tipo</th>
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="tablaProductos">
           <tr>
             <td><img src="../images/chivito.webp" alt="Chivito" /></td>
             <td>Chivitos</td>
             <td>$350</td>
+            <td>Casera</td>
             <td>
-              <button>Editar</button>
-              <button>Eliminar</button>
-            </td>
-          </tr>
-          <tr>
-            <td><img src="../images/hamburguesa.avif" alt="Hamburguesa" /></td>
-            <td>Hamburguesas</td>
-            <td>$400</td>
-            <td>
-              <button>Editar</button>
-              <button>Eliminar</button>
+              <button class="pure-button button-secondary">Editar</button>
+              <button class="pure-button button-warning">Eliminar</button>
             </td>
           </tr>
         </tbody>
