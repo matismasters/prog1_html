@@ -4,13 +4,21 @@ section table tr td img {
   margin: 5px;
 }
 
-section fieldset {
-  display: flex;
-  flex-wrap: wrap;
+section fieldset > div {
+  margin: 10px;
+  display: block;
 }
 
-fieldset > div {
-  margin: 10px;
+section fieldset label {
+  width: 200px;
+  display: inline-block;
+}
+
+section fieldset button {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  margin-top: 10px;
 }
 
 section table {
