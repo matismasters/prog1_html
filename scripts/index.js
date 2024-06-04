@@ -12,6 +12,8 @@ const SERVICIOS = [
   { id: 29, nombre: "Faina", precio: 200, img: "images/faina.jpg" }
 ]
 
+let CARRITO = [];
+
 function buscarServicio(idServicio) {
   for (let i = 0; i < SERVICIOS.length; i++) {
     if (SERVICIOS[i].id == idServicio) {
@@ -21,7 +23,27 @@ function buscarServicio(idServicio) {
   return null;
 }
 
-let CARRITO = [];
+function agregarServicio(propiedadesDelServicio) {
+  // { id: 21, nombre: "Chivito", precio: 350, img: "images/chivito.webp", categoria: "Comida Casera" }
+
+  let nuevoServicio = propiedadesDelServicio;
+
+  let valido = true;
+
+  if (nuevoServicio.nombre === "") {
+    valido = false;
+    alert("El nombre no puede estar vacío");
+  }
+
+  if (nuevoServicio.precio === "" || isNaN(nuevoServicio.precio)) {
+    valido = false;
+    alert("El precio no puede estar vacío");
+  }
+
+  if (valido) {
+    SERVICIOS.push(nuevoServicio);
+  }
+}
 
 function agregarServicioAlCarrito(servicio) {
   let indice = buscarEnCarrito(servicio);
@@ -68,6 +90,8 @@ function documentOnLoad() {
     let li = crearLiServicio(SERVICIOS[i]);
     ul.appendChild(li);
   }
+
+  document.getElementById("botonAgregarServicio").addEventListener("click", onClickBotonAgregarServicio);
 }
 
 document.addEventListener('DOMContentLoaded', documentOnLoad);
@@ -173,4 +197,21 @@ function onClickBotonComprar(evento) {
   console.log(CARRITO);
 
   generarCarrito();
+}
+
+function onClickBotonAgregarServicio(evento) {
+  let id = document.getElementById("id").value;
+  let nombre = document.getElementById("nombre").value;
+  let precio = document.getElementById("precio").value;
+  let img = document.getElementById("img").value;
+
+  let parametrosServicio = {
+    id: id,
+    nombre: nombre,
+    precio: precio,
+    img: img
+  };
+
+  agregarServicio(parametrosServicio);
+  documentOnLoad();
 }

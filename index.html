@@ -32,26 +32,33 @@
       <span>$350</span>
       <button>Comprar</button>
     </li>
-    <li>
-      <span>Hamburguesas</span>
-      <img src="images/hamburguesa.avif" alt="Hamburguesa" />
-      <span>$400</span>
-      <button>Comprar</button>
-    </li>
-    <li>
-      <span>Pizzas</span>
-      <img src="images/pizza.avif" alt="Pizza" />
-      <span>$450</span>
-      <button>Comprar</button>
-    </li>
-    <li>
-      <span>Empanadas</span>
-      <img src="images/empanadas.avif" alt="Empanadas" />
-      <span>$65</span>
-      <button>Comprar</button>
-    </li>
   </ul>
-
+  <div class="admin">
+    <div class="linea-formulario">
+      <label for="nombre">Nombre del Servicio:</label>
+      <input type="text" id="nombreDelServicio" />
+    </div>
+    <div class="linea-formulario">
+      <label for="precio">Precio del Servicio:</label>
+      <input type="number" id="precioDelServicio" />
+    </div>
+    <div class="linea-formulario">
+      <label for="imagen">Imagen del Servicio:</label>
+      <input type="text" id="imagenDelServicio" />
+    </div>
+    <div class="linea-formulario">
+      <label for="id">Tipo de servicio:</label>
+      <select id="tipoDelServicio">
+        <option value="Comida Chatarra">Comida Chatarra</option>
+        <option value="Comida Sana">Comida Sana</option>
+        <option value="Comida Rica">Comida Rica</option>
+        <option value="Comida Casera">Comida Casera</option>
+      </select>
+    </div>
+    <div class="linea-formulario">
+      <button id="botonAgregarServicio">Agregar Servicio</button>
+    </div>
+  </div>
 </body>
 
 </html>
