@@ -4,7 +4,7 @@
   subtramas para finalizar la carga.
 */
 
-const SERVICIOS = [
+const PRODUCTOS = [
   { id: 25, nombre: "Chivito", precio: 350, urlImagen: "images/chivito.webp" },
   { id: 26, nombre: "Hamburguesa", precio: 250, urlImagen: "images/hamburguesa.avif" },
   { id: 27, nombre: "Pizza", precio: 150, urlImagen: "images/pizza.avif" },
@@ -15,15 +15,13 @@ const SERVICIOS = [
 let CARRITO = [];
 
 function buscarProducto(idProducto) {
-  for (let i = 0; i < SERVICIOS.length; i++) {
-    if (SERVICIOS[i].id == idProducto) {
-      return SERVICIOS[i];
+  for (let i = 0; i < PRODUCTOS.length; i++) {
+    if (PRODUCTOS[i].id == idProducto) {
+      return PRODUCTOS[i];
     }
   }
   return null;
 }
-
-let CARRITO = [];
 
 function agregarProductoAlCarrito(producto) {
   let indice = buscarEnCarrito(producto);
@@ -66,12 +64,12 @@ function documentOnLoad() {
   let ul = document.getElementById("lista-productos");
   ul.innerHTML = "";
 
-  for (let i = 0; i < SERVICIOS.length; i++) {
-    let li = crearLiProducto(SERVICIOS[i]);
+  for (let i = 0; i < PRODUCTOS.length; i++) {
+    let li = crearLiProducto(PRODUCTOS[i]);
     ul.appendChild(li);
   }
 
-  document.getElementById("botonAgregarServicio").addEventListener("click", onClickBotonAgregarServicio);
+  document.getElementById("botonAgregarProducto").addEventListener("click", onClickBotonAgregarProducto);
 }
 
 document.addEventListener('DOMContentLoaded', documentOnLoad);
@@ -81,9 +79,9 @@ function crearLiProducto(producto) {
   li.dataset.idproducto = producto.id;
   let span = document.createElement("span");
   span.innerHTML = producto.nombre;
-  let urlImagen = document.createElement("urlImagen");
-  urlImagen.src = producto.urlImagen;
-  urlImagen.alt = producto.nombre;
+  let img = document.createElement("img");
+  img.src = producto.urlImagen;
+  img.alt = producto.nombre;
   let span2 = document.createElement("span");
   span2.innerHTML = `$${producto.precio}`;
   let button = document.createElement("button");
@@ -92,7 +90,7 @@ function crearLiProducto(producto) {
   button.addEventListener("click", onClickBotonComprar);
 
   li.appendChild(span);
-  li.appendChild(urlImagen);
+  li.appendChild(img);
   li.appendChild(span2);
   li.appendChild(button);
 
@@ -139,9 +137,9 @@ function crearLiCarrito(lineaCarrito) {
   let li = document.createElement("li");
   li.dataset.idproducto = producto.id;
 
-  let urlImagen = document.createElement("urlImagen");
-  urlImagen.src = producto.urlImagen;
-  urlImagen.alt = producto.nombre;
+  let img = document.createElement("img");
+  img.src = producto.urlImagen;
+  img.alt = producto.nombre;
 
   let botonEliminar = document.createElement("button");
   botonEliminar.innerHTML = "X";
@@ -179,19 +177,19 @@ function onClickBotonComprar(evento) {
   generarCarrito();
 }
 
-function onClickBotonAgregarServicio(evento) {
+function onClickBotonAgregarProducto(evento) {
   let id = document.getElementById("id").value;
   let nombre = document.getElementById("nombre").value;
   let precio = document.getElementById("precio").value;
   let img = document.getElementById("img").value;
 
-  let parametrosServicio = {
+  let parametrosProducto = {
     id: id,
     nombre: nombre,
     precio: precio,
     img: img
   };
 
-  agregarServicio(parametrosServicio);
+  agregarProducto(parametrosProducto);
   documentOnLoad();
 }
