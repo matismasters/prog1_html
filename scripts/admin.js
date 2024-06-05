@@ -58,6 +58,7 @@ function renderizarProducto(producto) {
   imgImagen.src = "../" + producto.url_imagen;
   imgImagen.alt = producto.nombre;
   celdaUrlImagen.appendChild(imgImagen);
+
   fila.appendChild(celdaUrlImagen);
 
   celdaNombre = document.createElement("td");
@@ -65,7 +66,7 @@ function renderizarProducto(producto) {
   fila.appendChild(celdaNombre);
 
   celdaPrecio = document.createElement("td");
-  celdaPrecio.innerText = producto.precio;
+  celdaPrecio.innerText = `$${producto.precio}`;
   fila.appendChild(celdaPrecio);
 
   celdaTipo = document.createElement("td");
@@ -73,19 +74,23 @@ function renderizarProducto(producto) {
   fila.appendChild(celdaTipo);
 
   celdaAcciones = document.createElement("td");
+  divBtnGroup = document.createElement("div");
+  divBtnGroup.classList.add("btn-group");
 
   botonEditar = document.createElement("button");
-  botonEditar.classList.add("pure-button");
-  botonEditar.classList.add("button-secondary");
+  botonEditar.classList.add("btn");
+  botonEditar.classList.add("btn-secondary");
   botonEditar.innerText = "Editar";
-  celdaAcciones.appendChild(botonEditar);
+  divBtnGroup.appendChild(botonEditar);
 
   botonEliminar = document.createElement("button");
-  botonEliminar.classList.add("pure-button");
-  botonEliminar.classList.add("button-warning");
+  botonEliminar.classList.add("btn");
+  botonEliminar.classList.add("btn-danger");
   botonEliminar.innerText = "Eliminar";
   botonEliminar.addEventListener("click", onClickBotonEliminar);
-  celdaAcciones.appendChild(botonEliminar);
+  divBtnGroup.appendChild(botonEliminar);
+
+  celdaAcciones.appendChild(divBtnGroup);
 
   fila.appendChild(celdaAcciones);
   return fila;
