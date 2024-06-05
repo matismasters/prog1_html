@@ -53,3 +53,13 @@
 .carrito li button {
   margin-left: 5px;
 }
+
+.admin {
+  margin: 50px;
+  padding: 50px;
+}
+
+.admin .linea-formulario {
+  margin: 10px;
+  padding: 10px;
+}
