@@ -1,9 +1,3 @@
-/* 
-  DOMContentLoaded es un evento que se dispara cuando el documento HTML ha sido 
-  completamente cargado y parseado, sin esperar hojas de estilo, imágenes y 
-  subtramas para finalizar la carga.
-*/
-
 const PRODUCTOS = [
   { id: 25, nombre: "Chivito", precio: 350, urlImagen: "images/chivito.webp" },
   { id: 26, nombre: "Hamburguesa", precio: 250, urlImagen: "images/hamburguesa.avif" },
@@ -25,7 +19,7 @@ function buscarProducto(idProducto) {
 
 function agregarProductoAlCarrito(producto) {
   let indice = buscarEnCarrito(producto);
-  console.log(indice);
+
   if (indice === -1) {
     CARRITO.push({
       producto: producto,
@@ -50,7 +44,6 @@ function eliminarProductoDelCarrito(producto) {
 }
 
 function buscarEnCarrito(producto) {
-  console.log(producto);
   for (let i = 0; i < CARRITO.length; i++) {
     if (CARRITO[i].producto.id == producto.id) {
       return i;
@@ -69,7 +62,6 @@ function documentOnLoad() {
     ul.appendChild(li);
   }
 
-  document.getElementById("botonAgregarProducto").addEventListener("click", onClickBotonAgregarProducto);
 }
 
 document.addEventListener('DOMContentLoaded', documentOnLoad);
@@ -145,7 +137,7 @@ function crearLiCarrito(lineaCarrito) {
   botonEliminar.innerHTML = "X";
   botonEliminar.addEventListener("click", onClickBotonEliminar);
 
-  li.appendChild(urlImagen);
+  li.appendChild(img);
 
   let span = document.createElement("span");
   span.innerHTML = `${cantidad}x ${producto.nombre} - $${producto.precio} ($${precioTotal})`;
@@ -157,13 +149,10 @@ function crearLiCarrito(lineaCarrito) {
 
 function onClickBotonEliminar(evento) {
   let li = evento.target.parentElement;
-  let ul = li.parentElement;
   let idProducto = li.dataset.idproducto;
   let producto = buscarProducto(idProducto);
 
   eliminarProductoDelCarrito(producto);
-  console.log(CARRITO);
-
   generarCarrito();
 }
 
@@ -172,8 +161,6 @@ function onClickBotonComprar(evento) {
   let producto = buscarProducto(idProducto);
 
   agregarProductoAlCarrito(producto);
-  console.log(CARRITO);
-
   generarCarrito();
 }
 

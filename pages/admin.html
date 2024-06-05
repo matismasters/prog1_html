@@ -11,16 +11,17 @@
   <title>Chivitosya - Admin</title>
 </head>
 <body>
-  <header>
-    <nav class="container-fluid">
-      <ul>
-        <li class="align-left">
-          <a href="index.html">Chivitosya - Admin</a>
+  <header class="container-fluid align-middle">
+    <nav>
+      <ul class="d-flex flex-row">
+        <li class="pt-3 pb-3 pl-1 fs-3 flex-start">
+          <a class="text-decoration-none" href="index.html">Chivitosya - Admin</a>
         </li>
-        <li class="align-right">
-          <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li>Admin</li>
+        <li class="flex-grow-1">
+          <ul class="d-flex flex-row-reverse fs-6 w-100 h-100">
+            <li class="p-3 pt-4 align-middle"> 
+              <a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="../index.html">Home</a></li>
+            <li class="p-3 pt-4 align-middle">Admin</a></li>
           </ul>
         </li>
       </ul>
@@ -28,7 +29,7 @@
   </header>
 
   <main>
-    <section class="container-fluid">
+    <section class="container-lg">
       <div class="margin-tb-lg">
         <button id="mostrarOcultarFormulario" class="btn btn-primary">Agregar producto</button>
         <fieldset class="oculto">
@@ -66,7 +67,7 @@
       </div>
     </section>
 
-    <section class="container-fluid">
+    <section class="container-lg">
       <h2>Lista de productos</h2>
       <table class="table table-striped align-middle table-hover table-bordered">
         <thead>

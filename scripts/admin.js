@@ -159,14 +159,15 @@ function onClickBotonAgregar() {
 }
 
 function onClickBotonEliminar(evento) {
-  let fila = evento.target.parentElement.parentElement;
+  evento.stopPropagation();
+  let fila = evento.target.parentElement.parentElement.parentElement;
   let idProducto = fila.dataset.idproducto;
   eliminarProducto(idProducto);
   renderizarProductos();
 }
 
 function onClickBotonEditar(evento) {
-  let fila = evento.target.parentElement.parentElement;
+  let fila = evento.target.parentElement.parentElement.parentElement;
   let idProducto = fila.dataset.idproducto;
   let producto = buscarProducto(idProducto);
 
