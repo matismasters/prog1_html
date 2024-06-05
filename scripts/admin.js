@@ -15,7 +15,7 @@ function storageGuardarProductos() {
 }
 
 function storageLeerProductos() {
-  return JSON.parse(localStorage.getItem("productos"));
+  return JSON.parse(localStorage.getItem("productos")) || [];
 }
 
 
