@@ -1,12 +1,16 @@
-const PRODUCTOS = [
-  { id: 25, nombre: "Chivito", precio: 350, urlImagen: "images/chivito.webp" },
-  { id: 26, nombre: "Hamburguesa", precio: 250, urlImagen: "images/hamburguesa.avif" },
-  { id: 27, nombre: "Pizza", precio: 150, urlImagen: "images/pizza.avif" },
-  { id: 28, nombre: "Empanadas", precio: 65, urlImagen: "images/empanadas.avif" },
-  { id: 29, nombre: "Faina", precio: 200, urlImagen: "images/faina.jpg" }
-]
+const PRODUCTOS = [];
 
 let CARRITO = [];
+
+function storageLeerProductos() {
+  return JSON.parse(localStorage.getItem("productos"));
+}
+
+function cargarProductos(productos) {
+  for (let producto of productos) {
+    PRODUCTOS.push(producto);
+  }
+}
 
 function buscarProducto(idProducto) {
   for (let i = 0; i < PRODUCTOS.length; i++) {
@@ -52,8 +56,7 @@ function buscarEnCarrito(producto) {
   return -1;
 }
 
-function documentOnLoad() {
-
+function renderizarProductos() {
   let ul = document.getElementById("lista-productos");
   ul.innerHTML = "";
 
@@ -61,7 +64,15 @@ function documentOnLoad() {
     let li = crearLiProducto(PRODUCTOS[i]);
     ul.appendChild(li);
   }
+}
 
+function documentOnLoad() {
+  if (PRODUCTOS.length === 0) {
+    let productosEnStorage = storageLeerProductos();
+    cargarProductos(productosEnStorage)
+  }
+
+  renderizarProductos();
 }
 
 document.addEventListener('DOMContentLoaded', documentOnLoad);
@@ -77,6 +88,9 @@ function crearLiProducto(producto) {
   let span2 = document.createElement("span");
   span2.innerHTML = `$${producto.precio}`;
   let button = document.createElement("button");
+  button.classList.add("btn");
+  button.classList.add("btn-primary");
+  button.classList.add("btn-sm");
   button.innerHTML = "Comprar";
 
   button.addEventListener("click", onClickBotonComprar);
@@ -134,6 +148,9 @@ function crearLiCarrito(lineaCarrito) {
   img.alt = producto.nombre;
 
   let botonEliminar = document.createElement("button");
+  botonEliminar.classList.add("btn");
+  botonEliminar.classList.add("btn-danger");
+  botonEliminar.classList.add("btn-sm");
   botonEliminar.innerHTML = "X";
   botonEliminar.addEventListener("click", onClickBotonEliminar);
 

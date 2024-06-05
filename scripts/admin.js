@@ -1,16 +1,34 @@
 document.addEventListener("DOMContentLoaded", documentOnLoad);
 
-const PRODUCTOS = [
-  { id: 25, nombre: "Chivito", precio: 350, url_imagen: "images/chivito.webp", tipo: "Casera" },
-  { id: 26, nombre: "Hamburguesa", precio: 250, url_imagen: "images/hamburguesa.avif", tipo: "Casera" },
-  { id: 27, nombre: "Pizza", precio: 150, url_imagen: "images/pizza.avif", tipo: "Pizzería" },
-  { id: 28, nombre: "Empanadas", precio: 65, url_imagen: "images/empanadas.avif", tipo: "Casera" },
-  { id: 29, nombre: "Faina", precio: 200, url_imagen: "images/faina.jpg", tipo: "Pizzería" }
+const PRECARGA_PRODUCTOS = [
+  { id: 25, nombre: "Chivito", precio: 350, urlImagen: "images/chivito.webp", tipo: "Casera" },
+  { id: 26, nombre: "Hamburguesa", precio: 250, urlImagen: "images/hamburguesa.avif", tipo: "Casera" },
+  { id: 27, nombre: "Pizza", precio: 150, urlImagen: "images/pizza.avif", tipo: "Pizzería" },
+  { id: 28, nombre: "Empanadas", precio: 65, urlImagen: "images/empanadas.avif", tipo: "Casera" },
+  { id: 29, nombre: "Faina", precio: 200, urlImagen: "images/faina.jpg", tipo: "Pizzería" }
 ]
+
+const PRODUCTOS = [];
+
+function storageGuardarProductos() {
+  localStorage.setItem("productos", JSON.stringify(PRODUCTOS));
+}
+
+function storageLeerProductos() {
+  return JSON.parse(localStorage.getItem("productos"));
+}
+
+
+function cargarProductos(productos) {
+  for (let producto of productos) {
+    agregarProducto(producto);
+  }
+}
 
 function agregarProducto(producto) {
   producto.id = ultimoIdProducto() + 1;
   PRODUCTOS.push(producto);
+  storageGuardarProductos();
 }
 
 function buscarProducto(idProducto) {
@@ -35,6 +53,7 @@ function eliminarProducto(idProducto) {
   let indice = buscarIndiceProducto(idProducto);
   if (indice !== -1) {
     PRODUCTOS.splice(indice, 1);
+    storageGuardarProductos();
   }
 }
 
@@ -55,7 +74,11 @@ function renderizarProducto(producto) {
 
   celdaUrlImagen = document.createElement("td");
   imgImagen = document.createElement("img");
-  imgImagen.src = "../" + producto.url_imagen;
+  if (producto.urlImagen.startsWith("http")) {
+    imgImagen.src = producto.urlImagen;
+  } else {
+    imgImagen.src = "../" + producto.urlImagen;
+  }
   imgImagen.alt = producto.nombre;
   celdaUrlImagen.appendChild(imgImagen);
 
@@ -115,7 +138,16 @@ function documentOnLoad() {
     .addEventListener("click", onClickBotonCancelar);
   document.getElementById("botonAgregar")
     .addEventListener("click", onClickBotonAgregar);
-  
+
+  let productosDeStorage = storageLeerProductos();
+
+  if (productosDeStorage.length === 0) {
+    cargarProductos(PRECARGA_PRODUCTOS);
+    storageGuardarProductos();
+  } else {
+    cargarProductos(productosDeStorage);
+  }
+
   renderizarProductos();
 }
 
@@ -154,12 +186,17 @@ function onClickBotonAgregar() {
   }
 
   agregarProducto({ nombre, precio, urlImagen, tipo });
+
+  inputNombre.value = "";
+  inputPrecio.value = "";
+  inputUrlImagen.value = "";
+  selectTipo.value = "";
+
   onClickMostrarOcultarFormulario();
   renderizarProductos();
 }
 
 function onClickBotonEliminar(evento) {
-  evento.stopPropagation();
   let fila = evento.target.parentElement.parentElement.parentElement;
   let idProducto = fila.dataset.idproducto;
   eliminarProducto(idProducto);
