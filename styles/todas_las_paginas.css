@@ -1,20 +1,7 @@
-header {
-  background-color: #f0f0f0;
-  padding: 10px;
-  margin-bottom: 20px;
-}
-
-header ul {
-  list-style-type: none;
-  padding-left: 10px;
+header img {
+  height: 60px;
 }
 
 .oculto {
   display: none;
-}
-
-footer {
-  background-color: #f0f0f0;
-  text-align: center;
-  padding: 10px;
 }

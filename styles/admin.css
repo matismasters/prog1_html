@@ -1,10 +1,6 @@
-img {
+main table img {
   width: 50px;
   height: 50px;
-}
-
-.margin-tb-lg {
-  margin: 2rem 0;
 }
 
 table tr td:last-child,
