@@ -3,7 +3,7 @@ const PRODUCTOS = [];
 let CARRITO = [];
 
 function storageLeerProductos() {
-  return JSON.parse(localStorage.getItem("productos"));
+  return JSON.parse(localStorage.getItem("productos")) || [];
 }
 
 function cargarProductos(productos) {
@@ -83,7 +83,11 @@ function crearLiProducto(producto) {
   let span = document.createElement("span");
   span.innerHTML = producto.nombre;
   let img = document.createElement("img");
-  img.src = producto.urlImagen;
+  if (producto.urlImagen.startsWith("http")) {
+    img.src = producto.urlImagen;
+  } else {
+    img.src = "../" + producto.urlImagen;
+  }
   img.alt = producto.nombre;
   let span2 = document.createElement("span");
   span2.innerHTML = `$${producto.precio}`;
@@ -144,7 +148,11 @@ function crearLiCarrito(lineaCarrito) {
   li.dataset.idproducto = producto.id;
 
   let img = document.createElement("img");
-  img.src = producto.urlImagen;
+  if (producto.urlImagen.startsWith("http")) {
+    img.src = producto.urlImagen;
+  } else {
+    img.src = "../" + producto.urlImagen;
+  }
   img.alt = producto.nombre;
 
   let botonEliminar = document.createElement("button");
