@@ -56,12 +56,12 @@ function buscarEnCarrito(producto) {
   return -1;
 }
 
-function renderizarProductos() {
+function renderizarProductos(productos) {
   let ul = document.getElementById("lista-productos");
   ul.innerHTML = "";
 
-  for (let i = 0; i < PRODUCTOS.length; i++) {
-    let li = crearLiProducto(PRODUCTOS[i]);
+  for (let i = 0; i < productos.length; i++) {
+    let li = crearLiProducto(productos[i]);
     ul.appendChild(li);
   }
 }
@@ -72,7 +72,24 @@ function documentOnLoad() {
     cargarProductos(productosEnStorage)
   }
 
-  renderizarProductos();
+  document.getElementById("buscar").addEventListener("input", onKeyPressInputBuscar);
+
+  renderizarProductos(PRODUCTOS);
+}
+
+function onKeyPressInputBuscar(evento) {
+  let texto = evento.target.value;
+
+  if (texto === "") {
+    renderizarProductos(PRODUCTOS);
+    return;
+  }
+
+  let productosFiltrados = PRODUCTOS.filter((producto) => {
+    return producto.nombre.toLowerCase().includes(texto.toLowerCase());
+  });
+
+  renderizarProductos(productosFiltrados)
 }
 
 document.addEventListener('DOMContentLoaded', documentOnLoad);
