@@ -31,6 +31,14 @@ function agregarProducto(producto) {
   storageGuardarProductos();
 }
 
+function modificarProducto(producto) {
+  let indice = buscarIndiceProducto(producto.id);
+  if (indice !== -1) {
+    PRODUCTOS[indice] = producto;
+    storageGuardarProductos();
+  }
+}
+
 function buscarProducto(idProducto) {
   for (let i = 0; i < PRODUCTOS.length; i++) {
     if (PRODUCTOS[i].id == idProducto) {
@@ -104,6 +112,7 @@ function renderizarProducto(producto) {
   botonEditar.classList.add("btn");
   botonEditar.classList.add("btn-secondary");
   botonEditar.innerText = "Editar";
+  botonEditar.addEventListener("click", onClickBotonEditar);
   divBtnGroup.appendChild(botonEditar);
 
   botonEliminar = document.createElement("button");
@@ -120,7 +129,7 @@ function renderizarProducto(producto) {
 }
 
 function renderizarProductos() {
-  const tablaProductos = document.getElementById("tablaProductos");
+  let tablaProductos = document.getElementById("tablaProductos");
   tablaProductos.innerHTML = "";
   let fila;
 
@@ -128,6 +137,32 @@ function renderizarProductos() {
     fila = renderizarProducto(producto);
     tablaProductos.appendChild(fila);
   }
+
+  document.getElementById("cardTotalProductos").innerText = PRODUCTOS.length;
+}
+
+function cambiarAFormularioAgregar() {
+  let leyendaFormulario = document.getElementById("leyendaFormulario");
+  let botonAgregarFormulario = document.getElementById("botonAgregar");
+
+  leyendaFormulario.innerText = "Agregar Producto";
+  botonAgregarFormulario.innerText = "Agregar";
+}
+
+function cambiarAFormularioEditar() {
+  let leyendaFormulario = document.getElementById("leyendaFormulario");
+  let botonAgregarFormulario = document.getElementById("botonAgregar");
+
+  leyendaFormulario.innerText = "Editar Producto";
+  botonAgregarFormulario.innerText = "Editar";
+}
+
+function limpiarFormulario() {
+  document.getElementById("nombre").value = "";
+  document.getElementById("precio").value = "";
+  document.getElementById("urlImagen").value = "";
+  document.getElementById("tipo").value = "Casera";
+  document.getElementById("idProductoParaEditar").value = "-1";
 }
 
 function documentOnLoad() {
@@ -151,6 +186,27 @@ function documentOnLoad() {
   renderizarProductos();
 }
 
+function onClickBotonEditar(evento) {
+  let botonAgregarProducto = document.getElementById("mostrarOcultarFormulario");
+  let estaVisibleElForm = botonAgregarProducto.dataset.formVisible === "true";
+
+  if (estaVisibleElForm === false) {
+    onClickMostrarOcultarFormulario();
+  }
+
+  cambiarAFormularioEditar();
+
+  let fila = evento.target.parentElement.parentElement.parentElement;
+  let idProducto = fila.dataset.idproducto;
+  let producto = buscarProducto(idProducto);
+
+  document.getElementById("idProductoParaEditar").value = producto.id;
+  document.getElementById("nombre").value = producto.nombre;
+  document.getElementById("precio").value = producto.precio;
+  document.getElementById("urlImagen").value = producto.urlImagen;
+  document.getElementById("tipo").value = producto.tipo;
+}
+
 function onClickMostrarOcultarFormulario() {
   let button = document.getElementById("mostrarOcultarFormulario");
   let fieldset = button.parentElement.querySelector("fieldset");
@@ -167,33 +223,38 @@ function onClickMostrarOcultarFormulario() {
 
 function onClickBotonCancelar() {
   onClickMostrarOcultarFormulario();
+  cambiarAFormularioAgregar();
+  limpiarFormulario();
 }
 
 function onClickBotonAgregar() {
-  const inputNombre = document.getElementById("nombre");
-  const inputPrecio = document.getElementById("precio");
-  const inputUrlImagen = document.getElementById("urlImagen");
-  const selectTipo = document.getElementById("tipo");
+  let inputNombre = document.getElementById("nombre");
+  let inputPrecio = document.getElementById("precio");
+  let inputUrlImagen = document.getElementById("urlImagen");
+  let selectTipo = document.getElementById("tipo");
+  let idProductoParaEditar = document.getElementById("idProductoParaEditar");
 
-  const nombre = inputNombre.value;
-  const precio = inputPrecio.value;
-  const urlImagen = inputUrlImagen.value;
-  const tipo = selectTipo.value;
+  let id = idProductoParaEditar.value;
+  let nombre = inputNombre.value;
+  let precio = inputPrecio.value;
+  let urlImagen = inputUrlImagen.value;
+  let tipo = selectTipo.value;
 
   if (nombre === "" || precio === "" || urlImagen === "" || tipo === "") {
     alert("Todos los campos son requeridos");
     return;
   }
 
-  agregarProducto({ nombre, precio, urlImagen, tipo });
+  if (id === "-1") {
+    agregarProducto({ nombre, precio, urlImagen, tipo });
+  } else {
+    modificarProducto({ id, nombre, precio, urlImagen, tipo });
+  }
 
-  inputNombre.value = "";
-  inputPrecio.value = "";
-  inputUrlImagen.value = "";
-  selectTipo.value = "";
-
+  limpiarFormulario();
   onClickMostrarOcultarFormulario();
   renderizarProductos();
+  cambiarAFormularioAgregar();
 }
 
 function onClickBotonEliminar(evento) {
@@ -203,17 +264,17 @@ function onClickBotonEliminar(evento) {
   renderizarProductos();
 }
 
-function onClickBotonEditar(evento) {
-  let fila = evento.target.parentElement.parentElement.parentElement;
-  let idProducto = fila.dataset.idproducto;
-  let producto = buscarProducto(idProducto);
+// function onClickBotonEditar(evento) {
+//   let fila = evento.target.parentElement.parentElement.parentElement;
+//   let idProducto = fila.dataset.idproducto;
+//   let producto = buscarProducto(idProducto);
 
-  document.getElementById("idProductoParaEditar").value = producto.id;
-  document.getElementById("nombre").value = producto.nombre;
-  document.getElementById("precio").value = producto.precio;
-  document.getElementById("urlImagen").value = producto.url_imagen;
-  document.getElementById("tipo").value = producto.tipo;
+//   document.getElementById("idProductoParaEditar").value = producto.id;
+//   document.getElementById("nombre").value = producto.nombre;
+//   document.getElementById("precio").value = producto.precio;
+//   document.getElementById("urlImagen").value = producto.url_imagen;
+//   document.getElementById("tipo").value = producto.tipo;
 
-  onClickMostrarOcultarFormulario();
-}
+//   onClickMostrarOcultarFormulario();
+// }
 

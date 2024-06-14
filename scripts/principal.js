@@ -99,6 +99,8 @@ function crearLiProducto(producto) {
   li.dataset.idproducto = producto.id;
   let span = document.createElement("span");
   span.innerHTML = producto.nombre;
+  let spanTipo = document.createElement("span");
+  span.innerHTML = producto.tipo;
   let img = document.createElement("img");
   if (producto.urlImagen.startsWith("http")) {
     img.src = producto.urlImagen;
@@ -118,6 +120,7 @@ function crearLiProducto(producto) {
 
   li.appendChild(span);
   li.appendChild(img);
+  li.appendChild(spanTipo);
   li.appendChild(span2);
   li.appendChild(button);
 
