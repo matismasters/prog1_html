@@ -12,7 +12,8 @@
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="../styles/todas_las_paginas.css">
   <link rel="stylesheet" href="../styles/demos_array.css">
-  <script src="../scripts/demos_array.js"></script>
+  <script src="../scripts/storageProductos.js"></script>
+  <script src="../scripts/storage3.js"></script>
 </head>
 
 <body>
@@ -69,7 +70,28 @@
   </header>
 
   <main>
+    <h1 id="h1Storage3">Este texto es h1 en storage 3</h1>
+    <h1 id="h1Contador">0</h1>
+    <div>
+      <label for="selectProductos">Productos:</label>
+      <select id="selectProductos"></select>
+    </div>
+    <div>
+      <label for="inputId">ID:</label>
+      <input type="text" id="inputId" name="inputId">
+      <br />
 
+      <label for="inputNombre">Nombre:</label>
+      <input type="text" id="inputNombre" name="inputNombre">
+      <br />
+
+      <label for="inputPrecio">Precio:</label>
+      <input type="number" id="inputPrecio" name="inputPrecio">
+      <button id="botonAgregar">Agregar</button>
+      <button id="botonModificar">Modificar</button>
+    </div>
+
+    </select>
   </main>
 
   <footer class="container-fluid border-top border-2 p-5">

@@ -56,7 +56,6 @@ for (let edad of edades) {
   acumulador += edad;
 }
 
-
 // sort
 console.log(JSON.stringify(alumnos));
 let alumnosOrdenados = alumnos.sort((alumno1, alumno2) => {
